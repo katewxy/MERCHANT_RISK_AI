@@ -2,17 +2,12 @@
 
 A production-style merchant risk control platform combining Machine Learning and rule-based engines to detect fraudulent transactions in real time.
 
-Built with a clean modular architecture — not a notebook demo.
-
+> This project was built to explore how real-world fraud detection systems are architected beyond ML models — using Logistic Regression with `class_weight="balanced"` to handle severe class imbalance in fraud data, combined with a rule-based engine and a clean service layer into a maintainable, scalable platform.
 ---
 
 ## 🚀 Live Demo
 
-> Run locally with Streamlit — see setup below.
-
-![Dashboard Preview](https://img.shields.io/badge/Streamlit-Dashboard-red)
-![Python](https://img.shields.io/badge/Python-3.9+-blue)
-![ML](https://img.shields.io/badge/Model-Logistic%20Regression-green)
+[▶️ Watch Demo on YouTube](https://www.youtube.com/watch?v=jWTEc0SSOKM)
 
 ---
 
