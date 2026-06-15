@@ -63,14 +63,14 @@ MERCHANT_RISK_AI/
 │   │   ├── governance.py     # Data cleaning & validation
 │   │   └── features.py       # ML feature engineering
 │   ├── models/
-│   │   ├── fraud_model.py    # Logistic Regression baseline
-│   │   └── xgb_model.py      # XGBoost classifier
+│   │   ├── fraud_model.py    # Logistic Regression (evaluation baseline only)
+│   │   └── xgb_model.py      # XGBoost classifier (production model)
 │   ├── risk/
 │   │   ├── rule_engine.py    # Rule-based risk scoring
 │   │   ├── risk_engine.py    # Hybrid score = rule_risk + ml_probability
 │   │   └── risk_metrics.py   # KPIs, rankings, trends
 │   ├── services/
-│   │   ├── pipeline.py       # End-to-end orchestration
+│   │   ├── pipeline.py       # End-to-end orchestration (Stage 5: XGBoost)
 │   │   └── analytics_service.py  # Clean API for dashboard
 │   └── ai/
 │       └── agent.py          # AI agent layer
@@ -130,7 +130,8 @@ python evaluate.py
 | Component | Technology |
 |-----------|-----------|
 | Dashboard | Streamlit + Plotly |
-| ML Models | XGBoost 2.1 + Scikit-learn Logistic Regression |
+| ML Model (production) | XGBoost 2.1 (`scale_pos_weight` for class imbalance) |
+| ML Model (baseline) | Scikit-learn Logistic Regression (evaluate.py only) |
 | Feature Engineering | pandas, scikit-learn StandardScaler |
 | Data | Kaggle Credit Card Fraud Dataset |
 | Language | Python 3.9+ |
