@@ -10,7 +10,7 @@ Pipeline stages:
   2. Govern    — validate schema, clean, deduplicate
   3. Enrich    — add merchant_id, customer_id, transaction_time
   4. Features  — build ML feature matrix
-  5. Model     — train Logistic Regression, generate P(fraud)
+  5. Model     — train XGBoost classifier, generate P(fraud)
   6. Rules     — apply rule-based risk scores
   7. Score     — combine into final_risk_score + risk_label
 
@@ -22,7 +22,7 @@ import pandas as pd
 from pathlib import Path
 
 from src.core import schema, governance, features
-from src.models.fraud_model import train_and_score
+from src.models.xgb_model import train as xgb_train, predict_fraud_probability
 from src.risk.rule_engine import apply_rules
 from src.risk.risk_engine import score_transactions
 
@@ -81,7 +81,8 @@ def run(path: Path = DATA_PATH) -> pd.DataFrame:
     X, y = features.build_feature_matrix(enriched)
 
     # Stage 5 — Model
-    _, ml_probs = train_and_score(X, y)
+    model = xgb_train(X, y)
+    ml_probs = predict_fraud_probability(model, X)
 
     # Stage 6 — Rules
     rule_risk = apply_rules(enriched)
